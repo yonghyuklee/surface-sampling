@@ -45,6 +45,7 @@ logger = logging.getLogger(__name__)
 file_dir = os.path.dirname(__file__)
 
 ENERGY_DIFF_LIMIT = 1e3  # in eV
+MAX_FORCE_LIMIT = 1 # in eV/AA
 
 
 class MCMC:
@@ -909,7 +910,7 @@ class MCMC:
             logger.debug(f"delta_pot_{delta_pot}")
             logger.debug(f"k_b T {self.temp}")
 
-            if np.abs(energy_diff) > ENERGY_DIFF_LIMIT:
+            if np.abs(energy_diff) > ENERGY_DIFF_LIMIT and results[2] > MAX_FORCE_LIMIT:
                 base_prob = 0.0
             else:
                 base_prob = np.exp(-(energy_diff - delta_pot) / self.temp)
