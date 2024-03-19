@@ -910,7 +910,7 @@ class MCMC:
             logger.debug(f"delta_pot_{delta_pot}")
             logger.debug(f"k_b T {self.temp}")
 
-            if np.abs(energy_diff) > ENERGY_DIFF_LIMIT and results[2] > MAX_FORCE_LIMIT:
+            if np.abs(energy_diff) > ENERGY_DIFF_LIMIT or results[2] > MAX_FORCE_LIMIT:
                 base_prob = 0.0
             else:
                 base_prob = np.exp(-(energy_diff - delta_pot) / self.temp)
