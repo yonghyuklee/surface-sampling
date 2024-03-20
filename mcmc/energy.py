@@ -312,6 +312,6 @@ def slab_energy(slab, relax=False, update_neighbors=True, **kwargs):
     else:
         energy = float(slab.get_potential_energy())
         energy_std = 0.0
-        max_force = 0.0
+        max_force = float(np.abs(slab.get_forces()).max())
         force_std = 0.0
     return energy, energy_std, max_force, force_std, pe_per_atom
